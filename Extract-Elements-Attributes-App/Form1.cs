@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Extract_Elements_Attributes_App
 {
@@ -15,6 +7,9 @@ namespace Extract_Elements_Attributes_App
         public Form1()
         {
             InitializeComponent();
+
+            // connect the system picker to the database picker
+            afDatabasePicker1.SystemPicker = piSystemPicker1;
         }
     }
 }

@@ -28,13 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.piSystemPicker1 = new OSIsoft.AF.UI.PISystemPicker();
+            this.afDatabasePicker1 = new OSIsoft.AF.UI.AFDatabasePicker();
+            this.afTreeView1 = new OSIsoft.AF.UI.AFTreeView();
+            this.SuspendLayout();
+            // 
+            // piSystemPicker1
+            // 
+            this.piSystemPicker1.AccessibleDescription = "PI System Picker";
+            this.piSystemPicker1.AccessibleName = "PI System Picker";
+            this.piSystemPicker1.ConnectAutomatically = true;
+            this.piSystemPicker1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.piSystemPicker1.Location = new System.Drawing.Point(12, 12);
+            this.piSystemPicker1.LoginPromptSetting = OSIsoft.AF.UI.PISystemPicker.LoginPromptSettingOptions.Default;
+            this.piSystemPicker1.Name = "piSystemPicker1";
+            this.piSystemPicker1.ShowBegin = false;
+            this.piSystemPicker1.ShowDelete = false;
+            this.piSystemPicker1.ShowEnd = false;
+            this.piSystemPicker1.ShowFind = false;
+            this.piSystemPicker1.ShowNavigation = false;
+            this.piSystemPicker1.ShowNew = false;
+            this.piSystemPicker1.ShowNext = false;
+            this.piSystemPicker1.ShowPrevious = false;
+            this.piSystemPicker1.ShowProperties = false;
+            this.piSystemPicker1.Size = new System.Drawing.Size(284, 22);
+            this.piSystemPicker1.TabIndex = 1;
+            // 
+            // afDatabasePicker1
+            // 
+            this.afDatabasePicker1.AccessibleDescription = "Database Picker";
+            this.afDatabasePicker1.AccessibleName = "Database Picker";
+            this.afDatabasePicker1.Location = new System.Drawing.Point(12, 40);
+            this.afDatabasePicker1.Name = "afDatabasePicker1";
+            this.afDatabasePicker1.ShowBegin = false;
+            this.afDatabasePicker1.ShowDelete = false;
+            this.afDatabasePicker1.ShowEnd = false;
+            this.afDatabasePicker1.ShowFind = false;
+            this.afDatabasePicker1.ShowList = false;
+            this.afDatabasePicker1.ShowNavigation = false;
+            this.afDatabasePicker1.ShowNew = false;
+            this.afDatabasePicker1.ShowNext = false;
+            this.afDatabasePicker1.ShowPrevious = false;
+            this.afDatabasePicker1.ShowProperties = false;
+            this.afDatabasePicker1.Size = new System.Drawing.Size(284, 22);
+            this.afDatabasePicker1.TabIndex = 2;
+            // 
+            // afTreeView1
+            // 
+            this.afTreeView1.HideSelection = false;
+            this.afTreeView1.Location = new System.Drawing.Point(12, 68);
+            this.afTreeView1.Name = "afTreeView1";
+            this.afTreeView1.ShowNodeToolTips = true;
+            this.afTreeView1.Size = new System.Drawing.Size(284, 377);
+            this.afTreeView1.TabIndex = 3;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.afTreeView1);
+            this.Controls.Add(this.afDatabasePicker1);
+            this.Controls.Add(this.piSystemPicker1);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private OSIsoft.AF.UI.PISystemPicker piSystemPicker1;
+        private OSIsoft.AF.UI.AFDatabasePicker afDatabasePicker1;
+        private OSIsoft.AF.UI.AFTreeView afTreeView1;
     }
 }
 
