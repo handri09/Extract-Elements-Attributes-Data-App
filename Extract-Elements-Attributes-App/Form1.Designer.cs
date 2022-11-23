@@ -38,6 +38,7 @@
             this.cbDataMethod = new System.Windows.Forms.ComboBox();
             this.btnGetData = new System.Windows.Forms.Button();
             this.lbValues = new System.Windows.Forms.ListBox();
+            this.btPutTxt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // piSystemPicker1
@@ -154,14 +155,25 @@
             this.lbValues.FormattingEnabled = true;
             this.lbValues.Location = new System.Drawing.Point(406, 42);
             this.lbValues.Name = "lbValues";
-            this.lbValues.Size = new System.Drawing.Size(579, 407);
+            this.lbValues.Size = new System.Drawing.Size(268, 381);
             this.lbValues.TabIndex = 13;
+            // 
+            // btPutTxt
+            // 
+            this.btPutTxt.Location = new System.Drawing.Point(407, 426);
+            this.btPutTxt.Name = "btPutTxt";
+            this.btPutTxt.Size = new System.Drawing.Size(267, 23);
+            this.btPutTxt.TabIndex = 14;
+            this.btPutTxt.Text = "Send To Text!";
+            this.btPutTxt.UseVisualStyleBackColor = true;
+            this.btPutTxt.Click += new System.EventHandler(this.btPutTxt_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(989, 455);
+            this.Controls.Add(this.btPutTxt);
             this.Controls.Add(this.lbValues);
             this.Controls.Add(this.btnGetData);
             this.Controls.Add(this.cbDataMethod);
@@ -191,6 +203,7 @@
         private System.Windows.Forms.ComboBox cbDataMethod;
         private System.Windows.Forms.Button btnGetData;
         private System.Windows.Forms.ListBox lbValues;
+        private System.Windows.Forms.Button btPutTxt;
     }
 }
 

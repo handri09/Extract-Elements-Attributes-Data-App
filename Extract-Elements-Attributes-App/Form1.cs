@@ -134,5 +134,26 @@ namespace Extract_Elements_Attributes_App
             }
 
         }
+
+        private void btPutTxt_Click(object sender, EventArgs e)
+        {
+            const string sPath = "save.txt";
+            
+            System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
+
+            // add some parameters
+            SaveFile.WriteLine(lbAttributes.SelectedItem);
+            SaveFile.WriteLine("Timestamp; Value; UOM ");
+
+            foreach (var item in lbValues.Items)
+            {
+                SaveFile.WriteLine(item.ToString().Replace(" 	 ", "; "));
+            }
+
+            SaveFile.ToString();
+            SaveFile.Close();
+
+            MessageBox.Show("Programs saved!");
+        }
     }
 }
