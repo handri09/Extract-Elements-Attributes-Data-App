@@ -31,6 +31,7 @@
             this.piSystemPicker1 = new OSIsoft.AF.UI.PISystemPicker();
             this.afDatabasePicker1 = new OSIsoft.AF.UI.AFDatabasePicker();
             this.afTreeView1 = new OSIsoft.AF.UI.AFTreeView();
+            this.lbAttributes = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // piSystemPicker1
@@ -51,7 +52,7 @@
             this.piSystemPicker1.ShowNext = false;
             this.piSystemPicker1.ShowPrevious = false;
             this.piSystemPicker1.ShowProperties = false;
-            this.piSystemPicker1.Size = new System.Drawing.Size(284, 22);
+            this.piSystemPicker1.Size = new System.Drawing.Size(388, 22);
             this.piSystemPicker1.TabIndex = 1;
             // 
             // afDatabasePicker1
@@ -70,23 +71,35 @@
             this.afDatabasePicker1.ShowNext = false;
             this.afDatabasePicker1.ShowPrevious = false;
             this.afDatabasePicker1.ShowProperties = false;
-            this.afDatabasePicker1.Size = new System.Drawing.Size(284, 22);
+            this.afDatabasePicker1.Size = new System.Drawing.Size(388, 22);
             this.afDatabasePicker1.TabIndex = 2;
+            this.afDatabasePicker1.SelectionChange += new OSIsoft.AF.UI.SelectionChangeEventHandler(this.afDatabasePicker1_SelectionChange);
             // 
             // afTreeView1
             // 
             this.afTreeView1.HideSelection = false;
+            this.afTreeView1.ItemHeight = 16;
             this.afTreeView1.Location = new System.Drawing.Point(12, 68);
             this.afTreeView1.Name = "afTreeView1";
             this.afTreeView1.ShowNodeToolTips = true;
-            this.afTreeView1.Size = new System.Drawing.Size(284, 377);
+            this.afTreeView1.Size = new System.Drawing.Size(217, 381);
             this.afTreeView1.TabIndex = 3;
+            this.afTreeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.afTreeView1_AfterSelect);
+            // 
+            // lbAttributes
+            // 
+            this.lbAttributes.FormattingEnabled = true;
+            this.lbAttributes.Location = new System.Drawing.Point(235, 68);
+            this.lbAttributes.Name = "lbAttributes";
+            this.lbAttributes.Size = new System.Drawing.Size(165, 381);
+            this.lbAttributes.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(771, 450);
+            this.Controls.Add(this.lbAttributes);
             this.Controls.Add(this.afTreeView1);
             this.Controls.Add(this.afDatabasePicker1);
             this.Controls.Add(this.piSystemPicker1);
@@ -101,6 +114,7 @@
         private OSIsoft.AF.UI.PISystemPicker piSystemPicker1;
         private OSIsoft.AF.UI.AFDatabasePicker afDatabasePicker1;
         private OSIsoft.AF.UI.AFTreeView afTreeView1;
+        private System.Windows.Forms.ListBox lbAttributes;
     }
 }
 
