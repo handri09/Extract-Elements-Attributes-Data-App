@@ -32,6 +32,12 @@
             this.afDatabasePicker1 = new OSIsoft.AF.UI.AFDatabasePicker();
             this.afTreeView1 = new OSIsoft.AF.UI.AFTreeView();
             this.lbAttributes = new System.Windows.Forms.ListBox();
+            this.cbUOM = new System.Windows.Forms.ComboBox();
+            this.tbEndTime = new System.Windows.Forms.TextBox();
+            this.tbStartTime = new System.Windows.Forms.TextBox();
+            this.cbDataMethod = new System.Windows.Forms.ComboBox();
+            this.btnGetData = new System.Windows.Forms.Button();
+            this.lbValues = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // piSystemPicker1
@@ -93,12 +99,75 @@
             this.lbAttributes.Name = "lbAttributes";
             this.lbAttributes.Size = new System.Drawing.Size(165, 381);
             this.lbAttributes.TabIndex = 4;
+            this.lbAttributes.SelectedIndexChanged += new System.EventHandler(this.lbAttributes_SelectedIndexChanged);
+            // 
+            // cbUOM
+            // 
+            this.cbUOM.DisplayMember = "Abbreviation";
+            this.cbUOM.FormattingEnabled = true;
+            this.cbUOM.Location = new System.Drawing.Point(565, 14);
+            this.cbUOM.Name = "cbUOM";
+            this.cbUOM.Size = new System.Drawing.Size(109, 21);
+            this.cbUOM.TabIndex = 10;
+            // 
+            // tbEndTime
+            // 
+            this.tbEndTime.Location = new System.Drawing.Point(486, 14);
+            this.tbEndTime.Name = "tbEndTime";
+            this.tbEndTime.Size = new System.Drawing.Size(70, 20);
+            this.tbEndTime.TabIndex = 8;
+            this.tbEndTime.Text = "*";
+            // 
+            // tbStartTime
+            // 
+            this.tbStartTime.Location = new System.Drawing.Point(407, 14);
+            this.tbStartTime.Name = "tbStartTime";
+            this.tbStartTime.Size = new System.Drawing.Size(73, 20);
+            this.tbStartTime.TabIndex = 9;
+            this.tbStartTime.Text = "*-3h";
+            // 
+            // cbDataMethod
+            // 
+            this.cbDataMethod.FormattingEnabled = true;
+            this.cbDataMethod.Items.AddRange(new object[] {
+            "Recorded Values",
+            "Interpolated Values",
+            "Plot Value"});
+            this.cbDataMethod.Location = new System.Drawing.Point(681, 14);
+            this.cbDataMethod.Name = "cbDataMethod";
+            this.cbDataMethod.Size = new System.Drawing.Size(143, 21);
+            this.cbDataMethod.TabIndex = 11;
+            this.cbDataMethod.Text = "Recorded Values";
+            // 
+            // btnGetData
+            // 
+            this.btnGetData.Location = new System.Drawing.Point(830, 12);
+            this.btnGetData.Name = "btnGetData";
+            this.btnGetData.Size = new System.Drawing.Size(155, 23);
+            this.btnGetData.TabIndex = 12;
+            this.btnGetData.Text = "Get Data!";
+            this.btnGetData.UseVisualStyleBackColor = true;
+            this.btnGetData.Click += new System.EventHandler(this.btnGetData_Click);
+            // 
+            // lbValues
+            // 
+            this.lbValues.FormattingEnabled = true;
+            this.lbValues.Location = new System.Drawing.Point(406, 42);
+            this.lbValues.Name = "lbValues";
+            this.lbValues.Size = new System.Drawing.Size(579, 407);
+            this.lbValues.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 450);
+            this.ClientSize = new System.Drawing.Size(989, 455);
+            this.Controls.Add(this.lbValues);
+            this.Controls.Add(this.btnGetData);
+            this.Controls.Add(this.cbDataMethod);
+            this.Controls.Add(this.cbUOM);
+            this.Controls.Add(this.tbEndTime);
+            this.Controls.Add(this.tbStartTime);
             this.Controls.Add(this.lbAttributes);
             this.Controls.Add(this.afTreeView1);
             this.Controls.Add(this.afDatabasePicker1);
@@ -106,6 +175,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -115,6 +185,12 @@
         private OSIsoft.AF.UI.AFDatabasePicker afDatabasePicker1;
         private OSIsoft.AF.UI.AFTreeView afTreeView1;
         private System.Windows.Forms.ListBox lbAttributes;
+        private System.Windows.Forms.ComboBox cbUOM;
+        private System.Windows.Forms.TextBox tbEndTime;
+        private System.Windows.Forms.TextBox tbStartTime;
+        private System.Windows.Forms.ComboBox cbDataMethod;
+        private System.Windows.Forms.Button btnGetData;
+        private System.Windows.Forms.ListBox lbValues;
     }
 }
 

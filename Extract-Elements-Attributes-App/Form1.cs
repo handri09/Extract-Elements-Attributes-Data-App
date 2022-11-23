@@ -2,7 +2,10 @@
 using OSIsoft.AF.Asset;
 using System.Windows.Forms;
 using System.Linq;
-
+using OSIsoft.AF.UnitsOfMeasure;
+using OSIsoft.AF.Time;
+using OSIsoft.AF.Data;
+using System;
 
 namespace Extract_Elements_Attributes_App
 {
@@ -45,6 +48,91 @@ namespace Extract_Elements_Attributes_App
             {
                 lbAttributes.Items.AddRange(selectedElement.Attributes.ToArray<AFAttribute>());
             }
+        }
+
+        private void lbAttributes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
+
+            //Clear the ComboBox
+            cbUOM.Items.Clear();
+            cbUOM.Text = null;
+
+            //If no attribute is selected, ball
+            if (selectedAttribute == null || selectedAttribute.DefaultUOM == null) return;
+
+            //Find the class of UOM that interest us
+            UOMClass selectedUOMClass = selectedAttribute.DefaultUOM.Class;
+
+            //Populate the combobox
+            cbUOM.Items.AddRange(selectedUOMClass.UOMs.ToArray());
+
+            //Select the default UOM, since we're benevolent people
+            cbUOM.SelectedItem = selectedAttribute.DefaultUOM;
+        }
+
+        private void btnGetData_Click(object sender, EventArgs e)
+        {
+            //Get data for the selected attribute
+            AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
+
+            //Get some AFTime objects
+            AFTime startTime = new AFTime(tbStartTime.Text);
+            AFTime endTime = new AFTime(tbEndTime.Text);
+            AFTimeRange timeRange = new AFTimeRange(startTime, endTime);
+
+            // Make the data call
+            UOM desiredUOM = cbUOM.SelectedItem as UOM;
+
+            AFValues values = new AFValues();
+
+            switch (cbDataMethod.Text)
+            {
+                case "Recorded Values":
+                    //Check if it support HasFlag
+                    if (selectedAttribute.SupportedDataMethods.HasFlag(AFDataMethods.RecordedValues))
+                    {
+                        values = selectedAttribute.Data.RecordedValues(timeRange
+                                                              , AFBoundaryType.Interpolated
+                                                              , desiredUOM
+                                                              , null
+                                                              , true);
+                    }
+                    break;
+                case "Interpolated Values":
+                    if (selectedAttribute.SupportedDataMethods.HasFlag(AFDataMethods.InterpolatedValues))
+                    {
+                        values = selectedAttribute.Data.InterpolatedValues(timeRange
+                                                          , AFTimeSpan.Parse("5m")  //Hard code a 5min time step here
+                                                          , desiredUOM
+                                                          , null
+                                                          , true);
+                    }
+                    break;
+                case "Plot Values":
+                    if (selectedAttribute.SupportedDataMethods.HasFlag(AFDataMethods.PlotValues))
+                    {
+                        values = selectedAttribute.Data.PlotValues(timeRange
+                                                          , 300  // Hard code a 300px plot width here
+                                                          , desiredUOM);
+                    }
+                    break;
+                default:
+                    values = new AFValues();
+                    break;
+            }
+
+            //populate the valuse in listbox
+            lbValues.Items.Clear();
+            foreach (AFValue value in values)
+            {
+                string s = String.Format("{0} \t {1} {2}"
+                                         , value.Timestamp.LocalTime
+                                         , value.Value
+                                         , value.UOM != null ? value.UOM.Abbreviation : null);
+                lbValues.Items.Add(s);
+            }
+
         }
     }
 }
