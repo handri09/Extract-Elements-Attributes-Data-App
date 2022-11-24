@@ -39,6 +39,7 @@
             this.btnGetData = new System.Windows.Forms.Button();
             this.lbValues = new System.Windows.Forms.ListBox();
             this.btPutTxt = new System.Windows.Forms.Button();
+            this.lbValuesAll = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // piSystemPicker1
@@ -98,6 +99,7 @@
             this.lbAttributes.FormattingEnabled = true;
             this.lbAttributes.Location = new System.Drawing.Point(235, 68);
             this.lbAttributes.Name = "lbAttributes";
+            this.lbAttributes.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbAttributes.Size = new System.Drawing.Size(165, 381);
             this.lbAttributes.TabIndex = 4;
             this.lbAttributes.SelectedIndexChanged += new System.EventHandler(this.lbAttributes_SelectedIndexChanged);
@@ -168,11 +170,20 @@
             this.btPutTxt.UseVisualStyleBackColor = true;
             this.btPutTxt.Click += new System.EventHandler(this.btPutTxt_Click);
             // 
+            // lbValuesAll
+            // 
+            this.lbValuesAll.FormattingEnabled = true;
+            this.lbValuesAll.Location = new System.Drawing.Point(680, 42);
+            this.lbValuesAll.Name = "lbValuesAll";
+            this.lbValuesAll.Size = new System.Drawing.Size(305, 381);
+            this.lbValuesAll.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(989, 455);
+            this.Controls.Add(this.lbValuesAll);
             this.Controls.Add(this.btPutTxt);
             this.Controls.Add(this.lbValues);
             this.Controls.Add(this.btnGetData);
@@ -204,6 +215,7 @@
         private System.Windows.Forms.Button btnGetData;
         private System.Windows.Forms.ListBox lbValues;
         private System.Windows.Forms.Button btPutTxt;
+        private System.Windows.Forms.ListBox lbValuesAll;
     }
 }
 

@@ -54,6 +54,12 @@ namespace Extract_Elements_Attributes_App
         {
             AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
 
+            lbValuesAll.Items.Clear();
+            foreach (var item in lbAttributes.SelectedItems)
+            {
+                lbValuesAll.Items.Add(item.ToString());
+            }
+
             //Clear the ComboBox
             cbUOM.Items.Clear();
             cbUOM.Text = null;
@@ -137,12 +143,16 @@ namespace Extract_Elements_Attributes_App
 
         private void btPutTxt_Click(object sender, EventArgs e)
         {
+            // get selected item as attribute
+            AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
+
             const string sPath = "save.txt";
             
             System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
 
             // add some parameters
-            SaveFile.WriteLine(lbAttributes.SelectedItem);
+            SaveFile.WriteLine("Database; Element; Attribute");
+            SaveFile.WriteLine("{0}; {1}; {2}", selectedAttribute.Database, selectedAttribute.Element, lbAttributes.SelectedItem);
             SaveFile.WriteLine("Timestamp; Value; UOM ");
 
             foreach (var item in lbValues.Items)
