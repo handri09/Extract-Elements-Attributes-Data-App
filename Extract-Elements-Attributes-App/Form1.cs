@@ -82,6 +82,8 @@ namespace Extract_Elements_Attributes_App
             //Get data for the selected attribute
             AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
 
+            putValue(selectedAttribute);
+            /*
             //Get some AFTime objects
             AFTime startTime = new AFTime(tbStartTime.Text);
             AFTime endTime = new AFTime(tbEndTime.Text);
@@ -137,8 +139,7 @@ namespace Extract_Elements_Attributes_App
                                          , value.Value
                                          , value.UOM != null ? value.UOM.Abbreviation : null);
                 lbValues.Items.Add(s);
-            }
-
+            }*/
         }
 
         private void btPutTxt_Click(object sender, EventArgs e)
@@ -164,6 +165,66 @@ namespace Extract_Elements_Attributes_App
             SaveFile.Close();
 
             MessageBox.Show("Programs saved!");
+        }
+
+        private void putValue(AFAttribute attribute)
+        {
+            //Get some AFTime objects
+            AFTime startTime = new AFTime(tbStartTime.Text);
+            AFTime endTime = new AFTime(tbEndTime.Text);
+            AFTimeRange timeRange = new AFTimeRange(startTime, endTime);
+
+            // Make the data call
+            UOM desiredUOM = cbUOM.SelectedItem as UOM;
+
+            AFValues values = new AFValues();
+
+            switch (cbDataMethod.Text)
+            {
+                case "Recorded Values":
+                    //Check if it support HasFlag
+                    if (attribute.SupportedDataMethods.HasFlag(AFDataMethods.RecordedValues))
+                    {
+                        values = attribute.Data.RecordedValues(timeRange
+                                                              , AFBoundaryType.Interpolated
+                                                              , desiredUOM
+                                                              , null
+                                                              , true);
+                    }
+                    break;
+                case "Interpolated Values":
+                    if (attribute.SupportedDataMethods.HasFlag(AFDataMethods.InterpolatedValues))
+                    {
+                        values = attribute.Data.InterpolatedValues(timeRange
+                                                          , AFTimeSpan.Parse("5m")  //Hard code a 5min time step here
+                                                          , desiredUOM
+                                                          , null
+                                                          , true);
+                    }
+                    break;
+                case "Plot Values":
+                    if (attribute.SupportedDataMethods.HasFlag(AFDataMethods.PlotValues))
+                    {
+                        values = attribute.Data.PlotValues(timeRange
+                                                          , 300  // Hard code a 300px plot width here
+                                                          , desiredUOM);
+                    }
+                    break;
+                default:
+                    values = new AFValues();
+                    break;
+            }
+
+            //populate the valuse in listbox
+            lbValues.Items.Clear();
+            foreach (AFValue value in values)
+            {
+                string s = String.Format("{0} \t {1} {2}"
+                                         , value.Timestamp.LocalTime
+                                         , value.Value
+                                         , value.UOM != null ? value.UOM.Abbreviation : null);
+                lbValues.Items.Add(s);
+            }
         }
     }
 }
