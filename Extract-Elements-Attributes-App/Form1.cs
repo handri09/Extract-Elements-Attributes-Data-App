@@ -82,64 +82,12 @@ namespace Extract_Elements_Attributes_App
             //Get data for the selected attribute
             AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
 
-            putValue(selectedAttribute);
-            /*
-            //Get some AFTime objects
-            AFTime startTime = new AFTime(tbStartTime.Text);
-            AFTime endTime = new AFTime(tbEndTime.Text);
-            AFTimeRange timeRange = new AFTimeRange(startTime, endTime);
-
-            // Make the data call
-            UOM desiredUOM = cbUOM.SelectedItem as UOM;
-
-            AFValues values = new AFValues();
-
-            switch (cbDataMethod.Text)
-            {
-                case "Recorded Values":
-                    //Check if it support HasFlag
-                    if (selectedAttribute.SupportedDataMethods.HasFlag(AFDataMethods.RecordedValues))
-                    {
-                        values = selectedAttribute.Data.RecordedValues(timeRange
-                                                              , AFBoundaryType.Interpolated
-                                                              , desiredUOM
-                                                              , null
-                                                              , true);
-                    }
-                    break;
-                case "Interpolated Values":
-                    if (selectedAttribute.SupportedDataMethods.HasFlag(AFDataMethods.InterpolatedValues))
-                    {
-                        values = selectedAttribute.Data.InterpolatedValues(timeRange
-                                                          , AFTimeSpan.Parse("5m")  //Hard code a 5min time step here
-                                                          , desiredUOM
-                                                          , null
-                                                          , true);
-                    }
-                    break;
-                case "Plot Values":
-                    if (selectedAttribute.SupportedDataMethods.HasFlag(AFDataMethods.PlotValues))
-                    {
-                        values = selectedAttribute.Data.PlotValues(timeRange
-                                                          , 300  // Hard code a 300px plot width here
-                                                          , desiredUOM);
-                    }
-                    break;
-                default:
-                    values = new AFValues();
-                    break;
-            }
-
-            //populate the valuse in listbox
+            //var selectedAttributes = lbAttributes.SelectedItems;
             lbValues.Items.Clear();
-            foreach (AFValue value in values)
+            foreach (AFAttribute item in lbAttributes.SelectedItems)
             {
-                string s = String.Format("{0} \t {1} {2}"
-                                         , value.Timestamp.LocalTime
-                                         , value.Value
-                                         , value.UOM != null ? value.UOM.Abbreviation : null);
-                lbValues.Items.Add(s);
-            }*/
+                putValue(item);
+            }
         }
 
         private void btPutTxt_Click(object sender, EventArgs e)
@@ -152,9 +100,9 @@ namespace Extract_Elements_Attributes_App
             System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
 
             // add some parameters
-            SaveFile.WriteLine("Database; Element; Attribute");
-            SaveFile.WriteLine("{0}; {1}; {2}", selectedAttribute.Database, selectedAttribute.Element, lbAttributes.SelectedItem);
-            SaveFile.WriteLine("Timestamp; Value; UOM ");
+            //SaveFile.WriteLine("Database; Element; Attribute");
+            //SaveFile.WriteLine("{0}; {1}; {2}", selectedAttribute.Database, selectedAttribute.Element, lbAttributes.SelectedItem);
+            //SaveFile.WriteLine("Timestamp; Value; UOM ");
 
             foreach (var item in lbValues.Items)
             {
@@ -164,7 +112,7 @@ namespace Extract_Elements_Attributes_App
             SaveFile.ToString();
             SaveFile.Close();
 
-            MessageBox.Show("Programs saved!");
+            MessageBox.Show("Data saved!");
         }
 
         private void putValue(AFAttribute attribute)
@@ -175,7 +123,8 @@ namespace Extract_Elements_Attributes_App
             AFTimeRange timeRange = new AFTimeRange(startTime, endTime);
 
             // Make the data call
-            UOM desiredUOM = cbUOM.SelectedItem as UOM;
+            //UOM desiredUOM = cbUOM.SelectedItem as UOM;
+            UOM desiredUOM = attribute.DefaultUOM as UOM;
 
             AFValues values = new AFValues();
 
@@ -216,10 +165,13 @@ namespace Extract_Elements_Attributes_App
             }
 
             //populate the valuse in listbox
-            lbValues.Items.Clear();
+            // lbValues.Items.Clear();
             foreach (AFValue value in values)
             {
-                string s = String.Format("{0} \t {1} {2}"
+                string s = String.Format(" {0} | {1} | {2}; {3}; {4}; {5}"
+                                         , attribute.Database
+                                         , attribute.Element
+                                         , attribute.Name
                                          , value.Timestamp.LocalTime
                                          , value.Value
                                          , value.UOM != null ? value.UOM.Abbreviation : null);
