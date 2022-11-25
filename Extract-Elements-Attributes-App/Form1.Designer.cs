@@ -196,7 +196,9 @@
             this.Controls.Add(this.afDatabasePicker1);
             this.Controls.Add(this.piSystemPicker1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Extract Data";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

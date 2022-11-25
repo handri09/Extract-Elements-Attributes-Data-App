@@ -178,5 +178,10 @@ namespace Extract_Elements_Attributes_App
                 lbValues.Items.Add(s);
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
