@@ -115,6 +115,18 @@ namespace Extract_Elements_Attributes_App
             MessageBox.Show("Data saved!");
         }
 
+        private void saveToText()
+        {
+            string sPath = "save.txt";
+            System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
+            //SaveFile.WriteLine(item.ToString());
+
+            SaveFile.ToString();
+            SaveFile.Close();
+
+            MessageBox.Show("Data saved!");
+        }
+
         private void putValue(AFAttribute attribute)
         {
             //Get some AFTime objects
@@ -164,6 +176,10 @@ namespace Extract_Elements_Attributes_App
                     break;
             }
 
+            // plan to save in text file
+            string sPath = attribute.Database.ToString() + "_" + attribute.Element.ToString() + "_" + attribute.Name + ".txt";
+            System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
+
             //populate the valuse in listbox
             // lbValues.Items.Clear();
             foreach (AFValue value in values)
@@ -176,7 +192,13 @@ namespace Extract_Elements_Attributes_App
                                          , value.Value
                                          , value.UOM != null ? value.UOM.Abbreviation : null);
                 lbValues.Items.Add(s);
+                SaveFile.WriteLine(s); //.ToString()
             }
+
+            SaveFile.ToString();
+            SaveFile.Close();
+
+            //MessageBox.Show("Data saved!");
         }
 
         private void Form1_Load(object sender, EventArgs e)
