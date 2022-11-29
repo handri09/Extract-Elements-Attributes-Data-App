@@ -182,6 +182,7 @@ namespace Extract_Elements_Attributes_App
 
             //populate the valuse in listbox
             // lbValues.Items.Clear();
+            string last_value="";
             foreach (AFValue value in values)
             {
                 string s = String.Format(" {0} | {1} | {2}; {3}; {4}; {5}"
@@ -191,19 +192,15 @@ namespace Extract_Elements_Attributes_App
                                          , value.Timestamp.LocalTime
                                          , value.Value
                                          , value.UOM != null ? value.UOM.Abbreviation : null);
-                lbValues.Items.Add(s);
-                SaveFile.WriteLine(s); //.ToString()
+                last_value = s;
+                SaveFile.WriteLine(s);
             }
+            lbValues.Items.Add(last_value);
 
             SaveFile.ToString();
             SaveFile.Close();
 
             //MessageBox.Show("Data saved!");
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
