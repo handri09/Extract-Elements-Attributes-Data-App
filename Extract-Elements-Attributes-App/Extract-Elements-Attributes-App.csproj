@@ -7,7 +7,7 @@
     <ProjectGuid>{F76813DA-43AA-4182-A6F9-DCC61BBB285C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Extract_Elements_Attributes_App</RootNamespace>
-    <AssemblyName>²</AssemblyName>
+    <AssemblyName>Data-extract</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

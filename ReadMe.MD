@@ -10,3 +10,6 @@ The text file can be uploaded into PI DA for new recording of PI Points.
 3. Specify the Timestamp: Start and End Time
 4. Select The Archive Type you want to extract.
 5. Type Get Data Button which will extract data from PI and generate TEXT files.
+6. The generated file will have the architectures as name and content as values.
+
+For more information, please feel free to contact: Sunlead Technology Inc.

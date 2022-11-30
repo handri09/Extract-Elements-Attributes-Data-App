@@ -57,7 +57,10 @@ namespace Extract_Elements_Attributes_App
             lbValuesAll.Items.Clear();
             foreach (var item in lbAttributes.SelectedItems)
             {
-                lbValuesAll.Items.Add(item.ToString());
+                AFAttribute att = item as AFAttribute;
+                AFElement el = att.Element as AFElement;
+
+                lbValuesAll.Items.Add(el.GetPath() +" | "+ item.ToString());
             }
 
             //Clear the ComboBox
@@ -177,30 +180,31 @@ namespace Extract_Elements_Attributes_App
             }
 
             // plan to save in text file
-            string sPath = attribute.Database.ToString() + "_" + attribute.Element.ToString() + "_" + attribute.Name + ".txt";
+            //string sPath = attribute.Database.ToString() + "_" + attribute.Element.ToString() + "_" + attribute.Name + ".txt";
+            string sPath = attribute.Element.GetPath().Replace("\\\\", "").Replace("\\","__") + "__" + attribute.Name + ".txt";
             System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
 
-            //populate the valuse in listbox
+            // populate the valuse in listbox
             // lbValues.Items.Clear();
-            string last_value="";
+            SaveFile.WriteLine(attribute.Element.GetPath()+" | "+attribute.Name);
+            string last_value = "";
+
             foreach (AFValue value in values)
             {
-                string s = String.Format(" {0} | {1} | {2}; {3}; {4}; {5}"
-                                         , attribute.Database
-                                         , attribute.Element
+                string s = String.Format("{0}; {1}; {2}; {3}"
                                          , attribute.Name
                                          , value.Timestamp.LocalTime
                                          , value.Value
                                          , value.UOM != null ? value.UOM.Abbreviation : null);
-                last_value = s;
                 SaveFile.WriteLine(s);
+                last_value = s;
             }
-            lbValues.Items.Add(last_value);
 
+            lbValues.Items.Add(last_value);
             SaveFile.ToString();
             SaveFile.Close();
 
-            //MessageBox.Show("Data saved!");
+            MessageBox.Show("Data saved!");
         }
     }
 }
