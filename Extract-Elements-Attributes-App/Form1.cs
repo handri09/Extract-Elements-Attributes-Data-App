@@ -58,9 +58,8 @@ namespace Extract_Elements_Attributes_App
             foreach (var item in lbAttributes.SelectedItems)
             {
                 AFAttribute att = item as AFAttribute;
-                AFElement el = att.Element as AFElement;
 
-                lbValuesAll.Items.Add(el.GetPath() +" | "+ item.ToString());
+                lbValuesAll.Items.Add(att.Element.GetPath() +" | "+ item.ToString());
             }
 
             //Clear the ComboBox
@@ -91,41 +90,6 @@ namespace Extract_Elements_Attributes_App
             {
                 putValue(item);
             }
-        }
-
-        private void btPutTxt_Click(object sender, EventArgs e)
-        {
-            // get selected item as attribute
-            AFAttribute selectedAttribute = lbAttributes.SelectedItem as AFAttribute;
-
-            const string sPath = "save.txt";
-            
-            System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
-
-            // add some parameters
-            //SaveFile.WriteLine("Database; Element; Attribute");
-            //SaveFile.WriteLine("{0}; {1}; {2}", selectedAttribute.Database, selectedAttribute.Element, lbAttributes.SelectedItem);
-            //SaveFile.WriteLine("Timestamp; Value; UOM ");
-
-            foreach (var item in lbValues.Items)
-            {
-                SaveFile.WriteLine(item.ToString().Replace(" 	 ", "; "));
-            }
-
-            SaveFile.ToString();
-            SaveFile.Close();
-
-            MessageBox.Show("Data saved!");
-        }
-
-        private void saveToText()
-        {
-            string sPath = "save.txt";
-            System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
-            //SaveFile.WriteLine(item.ToString());
-
-            SaveFile.ToString();
-            SaveFile.Close();
 
             MessageBox.Show("Data saved!");
         }
@@ -138,7 +102,6 @@ namespace Extract_Elements_Attributes_App
             AFTimeRange timeRange = new AFTimeRange(startTime, endTime);
 
             // Make the data call
-            //UOM desiredUOM = cbUOM.SelectedItem as UOM;
             UOM desiredUOM = attribute.DefaultUOM as UOM;
 
             AFValues values = new AFValues();
@@ -180,12 +143,10 @@ namespace Extract_Elements_Attributes_App
             }
 
             // plan to save in text file
-            //string sPath = attribute.Database.ToString() + "_" + attribute.Element.ToString() + "_" + attribute.Name + ".txt";
             string sPath = attribute.Element.GetPath().Replace("\\\\", "").Replace("\\","__") + "__" + attribute.Name + ".txt";
             System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
 
             // populate the valuse in listbox
-            // lbValues.Items.Clear();
             SaveFile.WriteLine(attribute.Element.GetPath()+" | "+attribute.Name);
             string last_value = "";
 
@@ -203,8 +164,6 @@ namespace Extract_Elements_Attributes_App
             lbValues.Items.Add(last_value);
             SaveFile.ToString();
             SaveFile.Close();
-
-            MessageBox.Show("Data saved!");
         }
     }
 }
